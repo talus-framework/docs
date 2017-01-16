@@ -1,0 +1,16 @@
+#!/bin/bash
+
+DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+cd ..
+
+sudo apt-get install -y python-pip python-sphinx
+sudo pip install mock sphinx-rtd-theme
+
+rm -rf source/generated
+mkdir -p source/generated
+
+sphinx-apidoc -o source/generated ../src
+sphinx-apidoc -o source/generated ../src/client
+
+make html
